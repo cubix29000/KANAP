@@ -1,0 +1,14 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "npm",
+			"script": "install",
+			"path": "back",
+			"group": "clean",
+			"problemMatcher": [],
+			"label": "npm: install - back",
+			"detail": "install dependencies from package"
+		}
+	]
+}
