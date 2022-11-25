@@ -29,6 +29,7 @@ if (productId !== null){
         const option = document.createElement("option");
         const select = document.getElementById("colors");
 
+        
         /*****Récupération des options de couleurs dans les données de l'API ******/
         option.value = color;
         option.innerText = color;
