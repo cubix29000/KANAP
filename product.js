@@ -83,13 +83,59 @@ if (productId !== null){
                     alert("La quantité produit n'est pas conforme, veuillez modifier votre sélection. Merci");
                 }
             }
-  /***** */          
+  /*****Si item n'existe pas dans le local storage, ajout du produit(ID)+ l'option(couleur)*******/
+  /***** le message ira sur True dans la variable***** */
+  /****Le'enregistrement des produit ira dans une variable, permet de suivre les options************** */
+            else{
+                messageLocalStorageUpdating = true;
+                produitEnregistreDansLocalStorage.push(optionProduct);
             }
+            /********Envoi des informations Dans le LocalStorage, envoie des inforamtions de l 'Item /////Modification en format .JSON  */
+        localStorage.setItem("produit", JSON.stringify(produitEnregistreDansLocalStorage))
+        }
+/***************************Ligne 95 dernière ligne, FIN de la fonction addProductLocalStorage *******************************/
+
+/*****Dans le but de controler le stock du LocalStorage, On déclare une variable "produitEnregistrementDansLocalStorage"********/
+/*****Cette variable va nous servir a récupérer les clés ainsi que les valeurs des Items****************************************/
+
+let produitEnregistrementDansLocalStorage = JSON.parse(localStorage.getItem("produit"));
+
+/******On met en place les conditions si Le LocalStorage contient la clé du produit concerné******/
+if(produitEnregistreDansLocalStorage){
+    addProductLocalStorage();
+    console.log(produitEnregistreDansLocalStorage);
 }
 
+/******Conditions si le Local Storage est Vide!*****************/
+else{
+    produitEnregistreDansLocalStorage = [];
+    console.log(produitEnregistreDansLocalStorage);
+    /***** Pour mettre un message pour la réussite de l'ajout de l'item sur le LocalStorage on mettra la Variable ci dessous*****************/
+    messageLocalStorageUpdating = false;
+    alert('Item a bien été ajouté dans Le Store');
+    }
 
+    /****Pour l'ajout dans le panier et afficher le message du succès de l'opération faite par l'utilisateur on met cet variable que si la variable..... */
+    /***.... est TRUE alors : *************/
+if(messageLocalStorageUpdating){
+    alert(`Le Produit ${selectProduct.name} de couleur ${choiceColor} a bien été ajouté au panier.`);
+    }
+}
+/***** en cas d 'erreur de l'utilisateur sur la quantité ou sur la couleur************/
+else{
+    alert(`Selection non valide veuillez contrôler votre choix et recommencer. Merci`);
+    }
 
-    })
-
+    });
 })
+    .catch((err) => {
+        console.log("Erreur Fetch product.js : l'Id du produit est incorrect.", err);
+        alert(`Le produit selectionné n'a pas été trouvé dans la Base de Données!`);
+        window.location.href = "index.html";
+    })
+}
+else{
+        console.log("L'ID du produit introuvable");
+        alert(`Le produit est introuvable! `);
+        window.location.href = "index.html";
 }
