@@ -1,3 +1,14 @@
+/***Dans L'URL on récupère La chaine de requête */
+const queryStringUrl = window.location.search;
+console.log(queryStringUrl);
+
+
+/*******************Dans cette partie on extrait l ID de l'URL **********************/
+const urlID = new URLSearchParams(queryStringUrl);
+console.log(urlID);
+const productID = urlID.get("id");
+
+
 /*** Récupération de l'ID et installation de la constante de L' ID des produits (productID)*****/
 const productId = new URLSearchParams(document.location.search);
 console.log(productId);
@@ -128,11 +139,6 @@ else{
 
     });
 })
-    .catch((err) => {
-        console.log("Erreur Fetch product.js : l'Id du produit est incorrect.", err);
-        alert(`Le produit selectionné n'a pas été trouvé dans la Base de Données!`);
-        window.location.href = "index.html";
-    })
 }
 else{
         console.log("L'ID du produit introuvable");
