@@ -90,7 +90,7 @@ if (productId !== null) {
                            
                                 findProduct.quantityProduct = Number(findProduct.quantityProduct) + Number(optionsProduct.quantityProduct);
                                 console.log("update", findProduct);
-                                 /********Envoi des informations Dans le LocalStorage, envoie des inforamtions de l 'Item /////Modification en format .JSON  */
+                                 /********Envoi des informations Dans le LocalStorage, envoie des inforamtions de l 'Item  */
                                 localStorage.setItem("produit", JSON.stringify(findProduct));
                                 alert('La mise à jour du produit ${selectProduct.name} et de la couleur ${choiceColor} a été effectuée avec succès!');
                             }
@@ -105,7 +105,7 @@ if (productId !== null) {
                         /****Le'enregistrement des produit ira dans une variable, permet de suivre les options************** */
                         else {
                             console.log("add", optionsProduct);
-                             /********Envoi des informations Dans le LocalStorage, envoie des inforamtions de l 'Item /////Modification en format .JSON  */
+                             /********Envoi des informations Dans le LocalStorage, envoie des inforamtions de l 'Item  */
                             localStorage.setItem("produit", JSON.stringify(optionsProduct));
                         }
                        
@@ -113,7 +113,7 @@ if (productId !== null) {
                     addProductLocalStorage();
                     /***************************Ligne 95 dernière ligne, FIN de la fonction addProductLocalStorage *******************************/                   
                 }
-                /***** Pas d'erreur c'est Lessieur ************/
+    
                 else {
                     alert(`Selection non valide veuillez contrôler votre choix et recommencer. Merci`);
                 }
