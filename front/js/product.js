@@ -111,7 +111,7 @@ if (productId !== null) {
                        
                     }
                     addProductLocalStorage();
-                    /***************************Ligne 95 dernière ligne, FIN de la fonction addProductLocalStorage *******************************/                   
+                    /********************** FIN de la fonction addProductLocalStorage *******************************/                   
                 }
     
                 else {
