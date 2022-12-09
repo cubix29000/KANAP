@@ -71,6 +71,7 @@ if (productId !== null) {
                         colorProduct: choiceColor,
                         quantityProduct: choiceQuantity
                     }
+                    localStorage.setItem("produit", JSON.stringify(optionsProduct))
                     console.log("selectBoutonPanier.click", optionsProduct);
                     
                     /***comme pour la prochaine étape, les données doivent être vérifiées dans ma booléenne si une erreur sur les donées résult par un False  ************/
@@ -80,8 +81,14 @@ if (productId !== null) {
                   
                     const addProductLocalStorage = () => {
                         let produitEnregistreDansLocalStorage = JSON.parse(localStorage.getItem("produit"));
+                        if (produitEnregistreDansLocalStorage !== null)
+
+                        console.log(produitEnregistrementDansLocalStorage)
+
                         /***après vérification, si les données correspondent au LoacalStorage selection de la quantité  ******/
-                        let findProduct = produitEnregistreDansLocalStorage?.find((product) => { return product.idProduct === optionsProduct.idProduct && product.colorProduct === optionsProduct.colorProduct });
+
+                        let findProduct = produitEnregistreDansLocalStorage?.find((product) => { 
+                            return product.idProduct === optionsProduct.idProduct && product.colorProduct === optionsProduct.colorProduct });
                         if (findProduct) {
                             console.log("findProduct", findProduct)
                             const total = Number(findProduct.quantityProduct) + Number(optionsProduct.quantityProduct);
@@ -111,9 +118,9 @@ if (productId !== null) {
                        
                     }
                     addProductLocalStorage();
-                    /********************** FIN de la fonction addProductLocalStorage *******************************/                   
+                    /***************************Ligne 95 dernière ligne, FIN de la fonction addProductLocalStorage *******************************/                   
                 }
-    
+                /***** Pas d'erreur c'est Lessieur ************/
                 else {
                     alert(`Selection non valide veuillez contrôler votre choix et recommencer. Merci`);
                 }
