@@ -72,33 +72,45 @@ if (productId !== null) {
                         quantityProduct: choiceQuantity
                     }
                     localStorage.setItem("produit", JSON.stringify(optionsProduct))
-                    console.log("selectBoutonPanier.click", optionsProduct);
+
+             console.log("selectBoutonPanier.click", optionsProduct);
                     
-                    /***comme pour la prochaine étape, les données doivent être vérifiées dans ma booléenne si une erreur sur les donées résult par un False  ************/
-                    /****un message d erreur doit être émis si les données sont FALSE  **********/
-                    /*****DAns une premier temps mise en place d un sytème de contrôle lors de l 'ajout d'un item. Nous allons utiliser une variable pour s assurer que l'élèment  */
-                    /*****saisie respect les normes. En utilisant la proprièté "Local Storage" cela nous permet d'avoir un objet de stockage différents *******/
+             /***comme pour la prochaine étape, les données doivent être vérifiées dans ma booléenne si une erreur sur les donées résult par un False  ************/
+        /****un message d erreur doit être émis si les données sont FALSE  **********/
+        /*****DAns une premier temps mise en place d un sytème de contrôle lors de l 'ajout d'un item. Nous allons utiliser une variable pour s assurer que l'élèment  */
+         /*****saisie respect les normes. En utilisant la proprièté "Local Storage" cela nous permet d'avoir un objet de stockage différents *******/
                   
-                    const addProductLocalStorage = () => {
-                        let produitEnregistreDansLocalStorage = JSON.parse(localStorage.getItem("produit"));
-                        if (produitEnregistreDansLocalStorage !== null)
+                const addProductLocalStorage = () => {
+                       let produitEnregistreDansLocalStorage = localStorage.getItem("product");
 
-                        console.log(produitEnregistrementDansLocalStorage)
+                         if (produitEnregistreDansLocalStorage == null){
+                                return [];
+                        }else{
+                            return JSON.parse(cart);
+                        }
 
-                        /***après vérification, si les données correspondent au LoacalStorage selection de la quantité  ******/
+                 console.log(produitEnregistreDansLocalStorage)
 
-                        let findProduct = produitEnregistreDansLocalStorage?.find((product) => { 
+          /***après vérification, si les données correspondent au LoacalStorage selection de la quantité  ******/
+
+                        let findProduct = produitEnregistreDansLocalStorage.find((product) => { 
                             return product.idProduct === optionsProduct.idProduct && product.colorProduct === optionsProduct.colorProduct });
                         if (findProduct) {
                             console.log("findProduct", findProduct)
                             const total = Number(findProduct.quantityProduct) + Number(optionsProduct.quantityProduct);
                             if (total <= 100) {
-                                /****message de confirmation pour la mise à jour de la couleur et de la quantité, on intégre une variable********/
+   /****message de confirmation pour la mise à jour de la couleur et de la quantité, on intégre une variable********/
                            
-                                findProduct.quantityProduct = Number(findProduct.quantityProduct) + Number(optionsProduct.quantityProduct);
-                                console.log("update", findProduct);
+                     findProduct.quantityProduct = Number(findProduct.quantityProduct) + Number(optionsProduct.quantityProduct);
+                         console.log("update", findProduct);
                                  /********Envoi des informations Dans le LocalStorage, envoie des inforamtions de l 'Item  */
-                                localStorage.setItem("produit", JSON.stringify(findProduct));
+                    function addcart (product){
+                        let cart = getcart();
+                        panier.push(product);
+                        saveCart(cart);
+                    }
+                             localStorage.setItem("produit", JSON.stringify(findProduct));
+                                
                                 alert('La mise à jour du produit ${selectProduct.name} et de la couleur ${choiceColor} a été effectuée avec succès!');
                             }
                             else {
@@ -112,6 +124,7 @@ if (productId !== null) {
                         /****Le'enregistrement des produit ira dans une variable, permet de suivre les options************** */
                         else {
                             console.log("add", optionsProduct);
+
                              /********Envoi des informations Dans le LocalStorage, envoie des inforamtions de l 'Item  */
                             localStorage.setItem("produit", JSON.stringify(optionsProduct));
                         }
@@ -120,7 +133,6 @@ if (productId !== null) {
                     addProductLocalStorage();
                     /***************************Ligne 95 dernière ligne, FIN de la fonction addProductLocalStorage *******************************/                   
                 }
-                /***** Pas d'erreur c'est Lessieur ************/
                 else {
                     alert(`Selection non valide veuillez contrôler votre choix et recommencer. Merci`);
                 }
