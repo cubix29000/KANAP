@@ -1,12 +1,12 @@
 let produitsDansLeLocalStorage = JSON.parse(localStorage.getItem("produits"));
 const cartItems = document.getElementById("cart__items");
 
-/**
- * La fonction afficherProduitsDuLocalStorage() permet d'afficher les produits qui ont été sélectionnés et
- * ajouté dans le localStorage par l'utilisateur. Je fais afficher "Le panier est vide" si il n'y a pas d'articles présents
- * dans celui-ci.
- * Je crée mes éléments HTML et affiche les données présents dans le localStorage avec une boucle for...in
- */
+/*****************************************************************************************************************************
+La fonction afficherProduitsDuLocalStorage() permet d'afficher les produits qui ont été sélectionnés et
+ajouté dans le localStorage par l'utilisateur. Je fais afficher "Le panier est vide" si il n'y a pas d'articles présents
+dans celui-ci.
+Je crée mes éléments HTML et affiche les données présents dans le localStorage avec une boucle for...in
+*******************************************************************************************************************************/
 function afficherProduitsDuLocalStorage() {
 
     if (produitsDansLeLocalStorage === null || produitsDansLeLocalStorage == 0) {
@@ -47,7 +47,8 @@ function afficherProduitsDuLocalStorage() {
 
             const articlePrix = document.createElement("p");
             divCartItemContentTitlePrice.appendChild(articlePrix);
-            /*Affichage Prix unitaire: articlePrix.innerHTML = produitsDansLeLocalStorage[produits].prix + " €";*/
+
+/********************Affichage Prix unitaire: articlePrix.innerHTML = produitsDansLeLocalStorage[produits].prix + " €";****************/
             articlePrix.innerHTML = `${produitsDansLeLocalStorage[produits].prix * produitsDansLeLocalStorage[produits].quantite} €`;
 
             const divCartItemContentSettings = document.createElement("div");
@@ -84,11 +85,12 @@ function afficherProduitsDuLocalStorage() {
 }
 afficherProduitsDuLocalStorage();
 
-/**
- * La fonction montantEtQuantiteTotalPanier() permet d'afficher la quantité et la somme totale de la commande de la ligne totale.
- * Elle évolue en fonction du choix de l'utilisateur qui passe la commande. Les valeurs (quantité et prix) peuvent diminuer en fonction
- * la commande en cours.
- */
+/*******************************************************************************************************************************
+La fonction montantEtQuantiteTotalPanier() permet d'afficher la quantité et la somme totale de la commande de la ligne totale.
+Elle évolue en fonction du choix de l'utilisateur qui passe la commande. 
+Les valeurs (quantité et prix) peuvent diminuer en fonction
+la commande en cours.
+ *******************************************************************************************************************************/
 function montantEtQuantiteTotalPanier() {
 
     const qteTotal = document.querySelectorAll(".itemQuantity");
@@ -121,11 +123,13 @@ function montantEtQuantiteTotalPanier() {
 }
 montantEtQuantiteTotalPanier();
 
-/**
- * La fonction modificationQuantitePanier() permet de modifier la quantité de la commande de la page cart.html. L'utilisateur peut soit
- * la réduire ou l'augmenter en fonction de son besoin. Cette modification se fait grâce à un écouteur d'événement qui se fait au changement
- * de la valeur.
- */
+/****************************************************************************************************************
+La fonction modificationQuantitePanier() permet de modifier la quantité de la commande de la page cart.html. 
+L'utilisateur peut soit
+la réduire ou l'augmenter en fonction de son besoin. Cette modification se fait grâce à un écouteur 
+d'événement qui se fait au changement
+de la valeur.
+*********************************************************************************************************/
 function modificationQuantitePanier() {
 
     const modifQteProduit = document.querySelectorAll(".itemQuantity");
@@ -156,10 +160,11 @@ function modificationQuantitePanier() {
 }
 modificationQuantitePanier();
 
-/**
- * la fonction suppressionProduitPanier() permet de supprimer un produit du panier de la liste de commande. Elle s'effectue grâce à un écouteur d'événemet au clic
- * sur le bouton supprimer. 
- */
+/******************************************************************************************************************************
+  la fonction suppressionProduitPanier() permet de supprimer un produit du panier de la liste de commande.
+  Elle s'effectue grâce à un écouteur d'événemet au clic
+ *sur le bouton supprimer. 
+ *******************************************************************************************************************************/
 function suppressionProduitPanier() {
 
     let boutonSupprimer = document.querySelectorAll(".deleteItem");
@@ -169,9 +174,9 @@ function suppressionProduitPanier() {
         boutonSupprimer[suppression].addEventListener("click", (event) => {
             event.preventDefault();
 
-            // let suppressionIdProduit = produitsDansLeLocalStorage[suppression].idProduit;
+////////// let suppressionIdProduit = produitsDansLeLocalStorage[suppression].idProduit;///////////////////////////////////////
 
-            // produitsDansLeLocalStorage = produitsDansLeLocalStorage.filter((produit) => produit.idProduit !== suppressionIdProduit);
+///////produitsDansLeLocalStorage = produitsDansLeLocalStorage.filter((produit) => produit.idProduit !== suppressionIdProduit);///////
 
             let suppressionProduits = produitsDansLeLocalStorage[suppression].couleur;
 
@@ -186,10 +191,10 @@ function suppressionProduitPanier() {
 }
 suppressionProduitPanier();
 
-/**
- * La fonction controleDuFormulaire() permet de valider ou non le contenu des champs saisis par l'utiliateur.
- * Si le contenu ne corresponds. Un message apparait afin que celui-ci soit corrigé.
- */
+/************************************************************************************************************
+La fonction controleDuFormulaire() permet de valider ou non le contenu des champs saisis par l'utiliateur.
+ Si le contenu ne corresponds. Un message apparait afin que celui-ci soit corrigé.
+ ************************************************************************************************************/
 function controleDuFormulaire() {
 
     const cartOrderForm = document.querySelector(".cart__order__form");
@@ -198,32 +203,32 @@ function controleDuFormulaire() {
     let adresseRegExp = new RegExp("^[0-9]{1,3}(?:(?:[,. ]){1}[-a-zA-Zàâäéèêëïîôöùûüç]+)+");
     let nomPrenomVilleRegExp = new RegExp("^[a-zA-Z ,.'-]+$");
 
-    //Ecoute d'événement sur la modification du champ Prénom.
+//////////////////Ecoute d'événement sur la modification du champ Prénom//////////////////
     cartOrderForm.firstName.addEventListener("change", function () {
         validFirstName(this);
     });
 
-    //Ecoute d'événement sur la modification du champ Nom.
+///////////////Ecoute d'événement sur la modification du champ Nom///////////////////////////
     cartOrderForm.lastName.addEventListener("change", function () {
         validLastName(this);
     });
 
-    //Ecoute d'événement sur la modification du champ Adresse.
+//////////////Ecoute d'événement sur la modification du champ Adresse///////////////////////////
     cartOrderForm.address.addEventListener("change", function () {
         validAddress(this);
     });
 
-    //Ecoute d'événement sur la modification du champ Ville.
+////////////////Ecoute d'événement sur la modification du champ Ville///////////////////
     cartOrderForm.city.addEventListener("change", function () {
         validCity(this);
     });
 
-    //Ecoute d'événement sur la modification du champ Email.
+////////////Ecoute d'événement sur la modification du champ Email///////////////////////
     cartOrderForm.email.addEventListener("change", function () {
         validEmail(this);
     });
 
-    //validation du PRENOM
+//////////////////////////validation du PRENOM////////////////////////////////////
     const validFirstName = function (inputFirstName) {
         let firstNameErrorMsg = inputFirstName.nextElementSibling;
 
@@ -234,7 +239,7 @@ function controleDuFormulaire() {
         }
     };
 
-    //validation du NOM
+//////////////////////validation du NOM//////////////////////////////////////////
     const validLastName = function (inputLastName) {
         let lastNameErrorMsg = inputLastName.nextElementSibling;
 
@@ -245,7 +250,7 @@ function controleDuFormulaire() {
         }
     };
 
-    //validation de l'ADRESSE
+//////////////////validation de l'ADRESSE///////////////////////////////////////
     const validAddress = function (inputAddress) {
         let addressErrorMsg = inputAddress.nextElementSibling;
 
@@ -256,7 +261,7 @@ function controleDuFormulaire() {
         }
     };
 
-    //validation de la VILLE
+////////////////validation de la VILLE/////////////////////////////////////////
     const validCity = function (inputCity) {
         let cityErrorMsg = inputCity.nextElementSibling;
 
@@ -267,7 +272,7 @@ function controleDuFormulaire() {
         }
     };
 
-    //validation de l'EMAIL
+/////////////////validation de l'EMAIL//////////////////////////////////////
     const validEmail = function (inputEmail) {
         let emailErrorMsg = inputEmail.nextElementSibling;
 
@@ -280,10 +285,11 @@ function controleDuFormulaire() {
 }
 controleDuFormulaire();
 
-/**
- * La fonction envoieDeLaCommande() permet d'envoyer la commande de l'utilisateur en prenant en compte un paramètre important qui est l'idProduit. Cet idProduit permet
- * l'envoi de la requête ainsi que le contact.
- */
+/******************************************************************************************************************
+  La fonction envoieDeLaCommande() permet d'envoyer la commande de l'utilisateur en prenant en compte un paramètre 
+ important qui est l'idProduit. Cet idProduit permet
+  l'envoi de la requête ainsi que le contact.
+ ******************************************************************************************************************/
 function envoieDeLaCommande() {
 
     let products = [];
@@ -313,7 +319,7 @@ function envoieDeLaCommande() {
 
         const order = { contact, products };
 
-        //Création de la requête
+///////////////////////////////////Création de la requête///////////////////////////////////////////////////////////////
 
         const requete = fetch("http://localhost:3000/api/products/order", {
             method: "POST",
@@ -322,10 +328,10 @@ function envoieDeLaCommande() {
                 'Content-type': 'application/json'
             },
         })
-            //console.table(requete)
+    //////////////////////////////console.table(requete)/////////////////////////////////////////////////////////////////
             .then((response) => response.json())
             .then((data) => {
-                //console.table(data);
+    //////////////////////////////console.table(data);//////////////////////////////////////////////////////////////////
                 localStorage.setItem("orderId", data.orderId);
                 document.location.href = `confirmation.html?id=${data.orderId}`;
 
