@@ -19,8 +19,8 @@ fetch("http://localhost:3000/api/products")
    
 //// Si ERREUR : Affichage via HTML + console
     .catch((err) => {
-        document.querySelector("#cartAndFormContainer").innerHTML = "<h1>erreur 404</h1>"
-        console.log("API - erreur 404 : " + err)
+        document.querySelector("#cartAndFormContainer").innerHTML = "<h1>erreur</h1>"
+        console.log("API - erreur : " + err)
     })
 
 ////On récupère et on fait l'ajout de toutes les données qui ne sont pas stocké dans le Local Storage ******************************
@@ -290,14 +290,27 @@ function submitForm(e) {
 /////**********Fonction pour la mise en forme du formulaire de commande ******************** */
 function buildForm(e) {
 
-//// Déclaration et pointage des éléments nécéssaires
-    const myCart = JSON.parse(localStorage.getItem("Cart"))
-    const firstName = document.getElementById("firstName").value
-    const lastName = document.getElementById("lastName").value
-    const address = document.getElementById("address").value
-    const city = document.getElementById("city").value
-    const email = document.getElementById("email").value
-    
+////* Déclaration et pointage des éléments nécéssaires
+    //const myCart = JSON.parse(localStorage.getItem("Cart"))
+    //const firstName = document.getElementById("firstName").value
+    //const lastName = document.getElementById("lastName").value
+    //const address = document.getElementById("address").value
+    //const city = document.getElementById("city").value
+    //const email = document.getElementById("email").value
+    //
+let produitsDansLeLocalStorage = JSON.parse(localStorage.getItem("produits")) || [];
+const cartItems = document.getElementById("cart__items");
+const inputFirstName = document.getElementById("firstName");
+const inputLastName = document.getElementById("lastName");
+inputLastName.setAttribute("disabled", true)
+const inputAdress = document.getElementById("address");
+inputAdress.setAttribute("disabled", true)
+const inputCity =document.getElementById("city");
+inputCity.setAttribute("disabled", true)
+const inputMail = document.getElementById("email");
+inputMail.setAttribute("disabled", true)
+const buttonSubmit = document.getElementById("order");
+
 //// Constante : Appel des fonctions de validation
     const formValid = checkEmail() && checkAddress() && checkCity() && checkFirstName() && checkLastName()
 
