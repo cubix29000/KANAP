@@ -1,7 +1,6 @@
 //// On écoute les inputs du formulaires, ils doivent etre rempli avec les bonne informations//////////
 listenToForm()
 
-
 //// On utilise la méthode Fetch pour la récupération ainsi que la transmission des données de l'API/////
  
 fetch("http://localhost:3000/api/products")
