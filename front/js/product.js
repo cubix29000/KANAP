@@ -4,7 +4,42 @@ console.log("ID du produit à afficher :", id)
 
 ////Depuis l'API on récupère l'objet "produit"avec la méthode Fetch---------------
 fetch(`http://localhost:3000/api/products/${id}`)
-
+//****************************************************************************** */
+//On récupère les données FETCH 
+//   
+//   let fetch = function() {
+//            fetch (objectUrl)
+//              .then((response) => response.json())
+//              .then((data) => {
+//                  console.log(data);
+/////on récupère les données des images Img
+//
+//              let img = document.querySelector(".item__img");
+//              img.innerHTML = `<img src = "${data.imageUrl}" alt="${data.altTxt">;
+//
+//////Les données du titre (title) de l'item 
+//              let name = document.getElementById("title");
+//              name.innerHTML = data.name;
+//              let title = document.queryselector("title");
+//              title.innerHTML = data.name; 
+//              
+///// Les données pour le prix
+//              let price = document.getElementById("price");
+//              price.innerHTML = `${data.price}`;
+//
+////les données pour la description
+//              let descrription = document.getElementBId("description");
+//              description.innerHTML = data.description;
+//
+////les données pour les couleurs
+//              let color = document.getElementById("colors");
+//              for (i = 0; i< data.colors.length; i++) {
+//                  color.innerHTML += `<option value="${data.colors[i]}">${data.colors[i]}</option>`;
+//             }
+//         });
+//      };
+//  fetch();
+/***************************************************************** */
 ////On convertit les données de l'API en format JSON---------------
     .then((res) => res.json())
 
@@ -18,8 +53,8 @@ fetch(`http://localhost:3000/api/products/${id}`)
 
 //// Si mauvaise transmission message d erreur -------------
     .catch((err) => {
-        document.querySelector(".item").innerHTML = "<h1>erreur 404</h1>";
-        console.error("API - erreur 404 : " + err)
+        document.querySelector(".item").innerHTML = "<h1>erreur</h1>";
+        console.error("API - erreur  : " + err)
     })
 
 //// L'affichage des produits--------------------------------------------
@@ -162,8 +197,8 @@ function purchaseConfirmation(purchase) {
 
 //// Fenêtre de confirmation dans le navigateur
     if (window.confirm(`${purchase.name} option: ${purchase.color} a bien été ajouté au panier !
-        Consuler le Panier [OK] | Rester à ${purchase.name} [Annuler]`)) {
-        window.location.href = "cart.html"
+        Consulter le Panier [OK] | Rester à ${purchase.name} [Annuler]`)) {
+      //  window.location.href = "cart.html"*******************************************annulation de la redirection vers le panier
     } else {
         window.close
     }
