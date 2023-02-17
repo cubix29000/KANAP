@@ -12,12 +12,13 @@ fetch("http://localhost:3000/api/products")
         console.table(products)
 //// Utilisation de la fonction hydrate + paramètre "products"------------------
         hydrateProducts(products)
+
     })
 
 //// Le message d'erreur --------------------------------------------------------
     .catch((err) => {
-        document.querySelector(".titles").innerHTML = "<h1>erreur 404</h1>"
-        console.error("[API] erreur 404 : " + err)
+        document.querySelector(".titles").innerHTML = "<h1>erreur</h1>"
+        console.error("[API] erreur : " + err)
     })
 
 ////Affichage des produit de l' API---------------------------------------------
